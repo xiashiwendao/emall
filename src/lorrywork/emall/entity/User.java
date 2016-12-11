@@ -1,78 +1,80 @@
 /***********************************************************************
- * Module:  Good.java
+ * Module:  User.java
  * Author:  Lorry
- * Purpose: Defines the Class Good
+ * Purpose: Defines the Class User
  ***********************************************************************/
 package lorrywork.emall.entity;
 
-/**
- * ²úÆ·
- * 
- * @author Lorry
- *
- */
-public class Product {
-	/** @pdOid d3668422-b2a9-479a-9be2-1ea306114c9f */
+import java.util.*;
+
+public class User {
+	/** @pdOid 2ad2455a-e6ba-4d43-9877-812fe2d7510a */
 	private long id;
-	/** @pdOid 177a5bae-cdb9-4b97-90f5-38ea76d806cc */
-	private java.lang.String name;
-	/** @pdOid c467ed70-8a65-4423-ba2c-37f570d96d70 */
-	private int categoryId;
-	/** @pdOid 1d14353e-8a34-422f-92be-9d32a9268ed1 */
-	private java.lang.String picUrl;
-	/** @pdOid 437d5d6d-5e26-487e-a192-a38aefa2ba3b */
+	/** @pdOid dd0062c5-c8cc-4b77-ada9-d99f624496a4 */
+	private java.lang.String userName;
+	/** @pdOid 1a36cfc8-f9e3-4540-8cdb-6e859ba06506 */
+	private String password;
+	/** @pdOid d195a3d4-4540-4528-b6d7-ae3649a4400b */
 	private java.util.Date createDate;
-	/** @pdOid 3e43ba31-7f2e-47ff-9c45-5ec5d6494a8c */
+	/** @pdOid ae9f32e6-05b9-4928-b3a3-89cb7b7a1fdd */
 	private int createUserId;
-	/** @pdOid 5b21c5f3-b0e7-4b7a-bf8c-ad51adc860fa */
+	/** @pdOid 789815b6-dd50-497e-8003-b1a6d3277df6 */
 	private java.util.Date updateDate;
-	/** @pdOid 2930241d-3b43-4636-9c88-790d0e9e680c */
+	/** @pdOid 4898314c-4d0c-418c-9e47-f5a8226f3437 */
 	private int updateUserId;
+
 	public long getId() {
 		return id;
 	}
+
 	public void setId(long id) {
 		this.id = id;
 	}
-	public java.lang.String getName() {
-		return name;
+
+	public java.lang.String getUserName() {
+		return userName;
 	}
-	public void setName(java.lang.String name) {
-		this.name = name;
+
+	public void setUserName(java.lang.String userName) {
+		this.userName = userName;
 	}
-	public int getCategoryId() {
-		return categoryId;
+
+	public String getPassword() {
+		return password;
 	}
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
-	public java.lang.String getPicUrl() {
-		return picUrl;
-	}
-	public void setPicUrl(java.lang.String picUrl) {
-		this.picUrl = picUrl;
-	}
+
 	public java.util.Date getCreateDate() {
 		return createDate;
 	}
+
 	public void setCreateDate(java.util.Date createDate) {
 		this.createDate = createDate;
 	}
+
 	public int getCreateUserId() {
 		return createUserId;
 	}
+
 	public void setCreateUserId(int createUserId) {
 		this.createUserId = createUserId;
 	}
+
 	public java.util.Date getUpdateDate() {
 		return updateDate;
 	}
+
 	public void setUpdateDate(java.util.Date updateDate) {
 		this.updateDate = updateDate;
 	}
+
 	public int getUpdateUserId() {
 		return updateUserId;
 	}
+
 	public void setUpdateUserId(int updateUserId) {
 		this.updateUserId = updateUserId;
 	}
