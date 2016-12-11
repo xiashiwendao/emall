@@ -16,7 +16,7 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 	</bean>
 	<bean id="jdbcDataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="dm.jdbc.driver.DmDriver" />
-		<property name="url" value="jdbc:dm://10.1.108.5:5236" />
+		<property name="url" value="jdbc:dm://127.0.0.1:5236" />
 		<property name="username" value="TS" />
 		<property name="password" value="aaaaaaaaa" />
 	</bean>
