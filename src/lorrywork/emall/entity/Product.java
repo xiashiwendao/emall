@@ -6,7 +6,7 @@
 package lorrywork.emall.entity;
 
 /**
- * ��Ʒ
+ * 商品信息
  * 
  * @author Lorry
  *
@@ -44,6 +44,21 @@ public class Product {
 	 * @pdOid 2930241d-3b43-4636-9c88-790d0e9e680c
 	 */
 	private int updateUserId;
+
+	/**
+	 * 价格
+	 */
+	private double price;
+
+	public double getPrice() {
+		return price;
+	}
+	
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	
 
 	public long getId() {
 		return id;

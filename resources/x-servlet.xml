@@ -7,6 +7,8 @@
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	<mvc:annotation-driven />
+	<!-- 访问静态资源文件 -->
+	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<context:component-scan base-package="lorrywork.emall.controller" />
 	<!-- jsp视图 -->
 	<bean id="jspViewResolver"
@@ -24,7 +26,7 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="jdbcDataSource" />
 		<!-- 自动扫描mapping.xml文件 -->
-		<property name="mapperLocations" value="classpath*:lorrywork/emall/dao/mapping/*.xml" />
+		<property name="mapperLocations" value="classpath*:lorrywork/emall/dao/map/*/*.xml" />
 	</bean>
 	<!-- DAO类（Mapper类）接口所在包名，Spring会自动查找其下的类 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
