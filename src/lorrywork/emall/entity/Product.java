@@ -46,6 +46,19 @@ public class Product {
 	private int updateUserId;
 
 	/**
+	 * 说明
+	 */
+	private String introduction;
+
+	public String getIntroduction() {
+		return introduction;
+	}
+
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
+	}
+
+	/**
 	 * 价格
 	 */
 	private double price;
@@ -53,12 +66,10 @@ public class Product {
 	public double getPrice() {
 		return price;
 	}
-	
 
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	
 
 	public long getId() {
 		return id;
