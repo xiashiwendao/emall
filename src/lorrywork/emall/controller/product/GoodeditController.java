@@ -1,4 +1,4 @@
-package lorrywork.emall.controller;
+package lorrywork.emall.controller.product;
 
 import java.util.List;
 

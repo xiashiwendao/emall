@@ -10,7 +10,7 @@ package lorrywork.emall.entity;
  * 
  * @pdOid 5abdb7be-50e3-4994-9a7d-9340272db2d0
  */
-public class TopGood {
+public class TopProduct {
 	/** @pdOid e1527c01-1a6a-49ba-a29b-08e0a13c6423 */
 	private long id;
 
@@ -22,12 +22,12 @@ public class TopGood {
 		this.id = id;
 	}
 
-	public java.lang.String getGoodId() {
-		return goodId;
+	public java.lang.String getProductId() {
+		return productId;
 	}
 
-	public void setGoodId(java.lang.String goodId) {
-		this.goodId = goodId;
+	public void setProductId(java.lang.String productId) {
+		this.productId = productId;
 	}
 
 	public int getPositionId() {
@@ -71,7 +71,7 @@ public class TopGood {
 	}
 
 	/** @pdOid ccf9da08-4d69-45ac-aa54-853cc8e7dc9b */
-	private java.lang.String goodId;
+	private java.lang.String productId;
 	/** @pdOid 145c01e8-4754-418b-93ad-a4d9321ba105 */
 	private int positionId;
 	/** @pdOid 456ec3e6-dfc3-45e2-941d-907ada7139a2 */

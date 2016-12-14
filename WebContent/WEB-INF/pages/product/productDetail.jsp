@@ -11,13 +11,13 @@
 %>
 </head>
 <body>
-	<div style="width:100px;heigh:100px">
-		<img src="<%=path%>/resources/pics/Chrysanthemum.jpg" />
+	<div style="width: 100px; heigh: 100px">
+		<img src="<%=path%>${product.picUrl}" />
 	</div>
 	<div style="float: rigth; margin-left: 10px; margin-top: 50px">
 		<label>商品名称: </label>${product.name }<br /> <label>单价: </label>${product.price }
 	</div>
-	<div style="margin-top:30px">
+	<div style="margin-top: 30px">
 		<b>详情页面</b><br />
 		<p>${product.introduction }</p>
 	</div>
