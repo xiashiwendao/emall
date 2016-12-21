@@ -10,6 +10,7 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 	<!-- 访问静态资源文件 -->
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<context:component-scan base-package="lorrywork.emall.controller" />
+	<context:component-scan base-package="lorrywork.emall.startup" />
 	<!-- jsp视图 -->
 	<bean id="jspViewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
