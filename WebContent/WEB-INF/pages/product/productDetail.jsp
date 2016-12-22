@@ -11,13 +11,13 @@
 %>
 </head>
 <body>
-	<div style="width: 100px; heigh: 100px">
+	<div style="display:inline;">
 		<img src="<%=path%>${product.picUrl}" />
 	</div>
-	<div style="float: rigth; margin-left: 10px; margin-top: 50px">
+	<div style="display:inline-block">
 		<label>商品名称: </label>${product.name }<br /> <label>单价: </label>${product.price }
 	</div>
-	<div style="margin-top: 30px">
+	<div style="display:block;">
 		<b>详情页面</b><br />
 		<p>${product.introduction }</p>
 	</div>
