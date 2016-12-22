@@ -9,15 +9,23 @@
 <%
 	String path = request.getContextPath();
 %>
+<style>
+.product {
+	display: inline-block;
+	float: left;
+	position:absolute;
+	margin-left:5px;
+}
+</style>
 </head>
 <body>
-	<div style="display:inline;">
+	<div style="display: inline;">
 		<img src="<%=path%>${product.picUrl}" />
 	</div>
-	<div style="display:inline-block">
+	<div class="product">
 		<label>商品名称: </label>${product.name }<br /> <label>单价: </label>${product.price }
 	</div>
-	<div style="display:block;">
+	<div style="display: block;">
 		<b>详情页面</b><br />
 		<p>${product.introduction }</p>
 	</div>

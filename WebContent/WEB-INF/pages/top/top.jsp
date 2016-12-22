@@ -9,14 +9,30 @@
 <%
 	String path = request.getContextPath();
 %>
+<style>
+.search {
+	border: 1px solid #000;
+	height: 50px;
+	width: 70px;
+	float: left;
+	display: inline;
+	margin-left: 70px;
+	margin-top: 0px; position : absolute;
+	background-color: white;
+	position: absolute;
+	z-index:200px;
+}
+</style>
 </head>
 <body>
+	<div>
+		<label>查询商品</label> <input type="text" style="width: 100px" />
+	</div>
+	<div class="search">hehe</div>
 	<c:forEach var="product" items="${topList}">
-		<div style="width: 100px; heigh: 100px">
-			<img src="<%=path%>${product.picUrl}" />
-		</div>
-		<div style="float: rigth; margin-left: 10px; margin-top: 50px">
-			<label>商品名称: </label>${product.name }<br /> <label>单价: </label>${product.price }
+		<div style="display: inline-block">
+			<img src="<%=path%>${product.picUrl}" /><br /> <label>商品名称:
+			</label>${product.name }<br /> <label>单价: </label>${product.price }
 		</div>
 	</c:forEach>
 </body>
