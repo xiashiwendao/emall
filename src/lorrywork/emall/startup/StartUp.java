@@ -19,6 +19,7 @@ import com.sun.org.apache.xml.internal.serializer.utils.Utils;
 
 import lorrywork.emall.base.CUtils;
 import lorrywork.emall.base.ConfigProperties;
+import lorrywork.emall.base.Container;
 import lorrywork.emall.base.Cosnts;
 import lorrywork.emall.base.DbUtils;
 import lorrywork.emall.dao.TopMapper;
@@ -32,7 +33,7 @@ public class StartUp implements ServletContextListener {
 
 	@Override
 	public void contextDestroyed(ServletContextEvent arg0) {
-
+		
 	}
 
 	// @Autowired
@@ -47,7 +48,7 @@ public class StartUp implements ServletContextListener {
 			logger.debug("初始化，加载Top产品");
 			List<Product> lst = getTopList();
 			logger.debug("发现了{}个Top产品", lst.size());
-			Jedis jedis = new Jedis("127.0.0.1", 6379);
+			Jedis jedis = Container.getJedis();
 			jedis.connect();
 			Pipeline pl = jedis.pipelined();
 			for (Product p : lst) {

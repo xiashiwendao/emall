@@ -10,18 +10,19 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 	<!-- 访问静态资源文件 -->
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<context:component-scan base-package="lorrywork.emall.controller" />
-	<context:component-scan base-package="lorrywork.emall.startup" />
+	<context:component-scan base-package="lorrywork.emall.domain"/>
 	<!-- jsp视图 -->
 	<bean id="jspViewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/pages/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+	<context:property-placeholder location="classpath:config.properties"/>
 	<bean id="jdbcDataSource" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://127.0.0.1:3306/currentmark" />
-		<property name="username" value="root" />
-		<property name="password" value="rootadmin" />
+		<property name="driverClassName" value="${driver}" />
+		<property name="url" value="${dburl}" />
+		<property name="username" value="${uid}" />
+		<property name="password" value="${pwd}" />
 	</bean>
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

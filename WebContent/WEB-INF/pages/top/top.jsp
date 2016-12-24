@@ -17,17 +17,20 @@
 	float: left;
 	display: inline;
 	margin-left: 70px;
-	margin-top: 0px; position : absolute;
+	margin-top: 0px;
+	position: absolute;
 	background-color: white;
 	position: absolute;
-	z-index:200px;
+	z-index: 200px;
 }
 </style>
 </head>
 <body>
-	<div>
-		<label>查询商品</label> <input type="text" style="width: 100px" />
-	</div>
+	<form id="form1" action="search" method="post">
+		<div>
+			<label>查询商品</label> <input type="text" id="btnSearch" name="keyWord" style="width: 100px"/><input type="submit" value="检索"/>
+		</div>
+	</form>
 	<div class="search">hehe</div>
 	<c:forEach var="product" items="${topList}">
 		<div style="display: inline-block">
