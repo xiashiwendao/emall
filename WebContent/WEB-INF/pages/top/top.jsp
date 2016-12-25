@@ -4,73 +4,75 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<%
+  <%
 	String path = request.getContextPath();
 %>
-	<style>
-	.search {
-		border: 1px solid #000;
-		height: 50px;
-		width: 70px;
-		float: left;
-		display: inline;
-		margin-left: 70px;
-		margin-top: 0px;
-		position: absolute;
-		background-color: white;
-		position: absolute;
-		z-index: 200px;
-	}
-	</style>
+  <meta charset="utf-8">
+  <title>jQuery UI 自动完成（Autocomplete） - 远程 JSONP 数据源</title>
   <link rel="stylesheet" href="<%=path %>/resources/css/jquery-ui.css">
   <script src="<%=path %>/resources/js/jquery-1.12.4.js"></script>
   <script src="<%=path %>/resources/js/jquery-ui.js"></script>
+  <style>
+  .ui-autocomplete-loading {
+    background: white url('images/ui-anim_basic_16x16.gif') right center no-repeat;
+  }
+  #city { width: 25em; }
+
+  </style>
   <script>
-  $( function() {
-    var availableTags = [
-      "ActionScript",
-      "AppleScript",
-      "Asp",
-      "BASIC",
-      "C",
-      "C++",
-      "Clojure",
-      "COBOL",
-      "ColdFusion",
-      "Erlang",
-      "Fortran",
-      "Groovy",
-      "Haskell",
-      "Java",
-      "JavaScript",
-      "Lisp",
-      "Perl",
-      "PHP",
-      "Python",
-      "Ruby",
-      "Scala",
-      "Scheme"
-    ];
-    $("#keyWord").autocomplete({
-      source: availableTags
+  $(function() {
+    function log( message ) {
+      $( "<div>" ).text( message ).prependTo( "#log" );
+      $( "#log" ).scrollTop( 0 );
+    }
+ 
+    $( "#city" ).autocomplete({
+      source: function( request, response ) {
+        $.ajax({
+          url: "<%=path%>/search",
+          dataType: "json",
+          data: {
+            keyword:$("#city").val()
+          },
+          success: function( data ) {
+            response( $.map( data.geonames, function( item ) {
+              return {
+                label: item.name + (item.adminName1 ? ", " + item.adminName1 : "") + ", " + item.countryName,
+                value: item.name
+              }
+            }));
+          }
+        });
+      },
+      minLength: 2,
+      select: function( event, ui ) {
+        log( ui.item ?
+          "Selected: " + ui.item.label :
+          "Nothing selected, input was " + this.value);
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
     });
-  } );
-	</script>
+  });
+  </script>
 </head>
 <body>
-	<form id="form1" action="search" method="post">
-		<div>
-			<label>查询商品</label> <input type="text" id="keyWord" name="keyWord" style="width: 100px"/><input type="submit" value="检索"/>
-		</div>
-	</form>
-	<!-- <div class="search">hehe</div> -->
-	<c:forEach var="product" items="${topList}">
-		<div style="display: inline-block">
-			<img src="<%=path%>${product.picUrl}" /><br /> <label>商品名称:
-			</label>${product.name }<br /> <label>单价: </label>${product.price }
-		</div>
-	</c:forEach>
+ 
+<div class="ui-widget">
+  <label for="city">您的城市：</label>
+  <input id="city">
+  Powered by <a href="http://geonames.org" target="_blank">geonames.org</a>
+</div>
+ 
+<div class="ui-widget" style="margin-top:2em; font-family:Arial">
+  结果：
+  <div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
+</div>
+ 
+ 
 </body>
 </html>
