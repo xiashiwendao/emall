@@ -16,7 +16,7 @@
   .ui-autocomplete-loading {
     background: white url('images/ui-anim_basic_16x16.gif') right center no-repeat;
   }
-  #city { width: 25em; }
+  #keyWord { width: 25em; }
 
   </style>
   <script>
@@ -26,13 +26,13 @@
       $( "#log" ).scrollTop( 0 );
     }
  
-    $( "#city" ).autocomplete({
+    $( "#keyWord" ).autocomplete({
       source: function( request, response ) {
         $.ajax({
           url: "<%=path%>/search",
           dataType: "json",
           data: {
-            keyword:$("#city").val()
+            keyword:$("#keyWord").val()
           },
           success: function( data ) {
             response( $.map( data.geonames, function( item ) {
@@ -61,17 +61,20 @@
   </script>
 </head>
 <body>
- 
-<div class="ui-widget">
-  <label for="city">您的城市：</label>
-  <input id="city">
-  Powered by <a href="http://geonames.org" target="_blank">geonames.org</a>
-</div>
- 
-<div class="ui-widget" style="margin-top:2em; font-family:Arial">
-  结果：
-  <div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
-</div>
+	<form id="form1" action="search" method="post">
+		<div>
+			<label>查询商品</label> <input type="text" id="keyWord" name="keyWord" style="width: 100px"/><input type="submit" value="检索"/>
+		</div>
+	</form>
+	<!-- <div class="search">hehe</div> -->
+	<c:forEach var="product" items="${topList}">
+		<div style="display: inline-block">
+			<img src="<%=path%>${product.picUrl}" /><br /> <label>商品名称:
+			</label>${product.name }<br /> <label>单价: </label>${product.price }
+		</div>
+	</c:forEach>
+</body>
+</html>
  
  
 </body>
