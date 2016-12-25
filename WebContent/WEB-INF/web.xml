@@ -9,9 +9,6 @@
 		<param-value></param-value>
 	</context-param>
 	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
-	<listener>
 		<listener-class>lorrywork.emall.startup.StartUp</listener-class>
 	</listener>
 	<servlet>
