@@ -35,10 +35,11 @@
             keyword:$("#keyWord").val()
           },
           success: function( data ) {
-            response( $.map( data.geonames, function( item ) {
+        	  alert(data);
+            response( $.map(data, function(item) {
               return {
-                label: item.name + (item.adminName1 ? ", " + item.adminName1 : "") + ", " + item.countryName,
-                value: item.name
+                label: item.key,
+                value: item.value
               }
             }));
           }

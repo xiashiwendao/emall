@@ -1,10 +1,14 @@
 package lorrywork.emall.controller.product;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import lorrywork.emall.base.Container;
@@ -35,11 +39,16 @@ public class ProductController extends BaseController {
 	private KeywordManager keyMgr;
 
 	@RequestMapping(value = "/search")
-	public ModelAndView seachProduct(String keyword) {
+	@ResponseBody
+	public String seachProduct(String keyword) {
 		logger.debug("/P/ keyword: {}", keyword);
-		ModelAndView ret = null;
-		keyMgr.addKeyword(keyword);
+		//keyMgr.addKeyword(keyword);
 
-		return ret;
+		Map<String, String> ret = new HashMap<String, String>();
+		ret.put("name", "About");
+		ret.put("name1", "Bep");
+		ret.put("name2", "City");
+
+		return "abc";
 	}
 }

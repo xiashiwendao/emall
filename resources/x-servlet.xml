@@ -35,4 +35,11 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 		<property name="basePackage" value="lorrywork.emall.dao" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
+	<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">    
+	    <property name="supportedMediaTypes">    
+	        <list>    
+	            <value>application/json;charset=UTF-8</value>    
+	       </list>  
+	    </property>  
+	</bean>  
 </beans> 

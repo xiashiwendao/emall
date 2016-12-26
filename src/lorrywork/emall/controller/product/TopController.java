@@ -24,7 +24,7 @@ public class TopController {
 		logger.debug("进入到首页面");
 		List<Product> lst = mapper.getTopList();
 		model.addObject("topList", lst);
-		model.setViewName("/top/top");
+		model.setViewName("/test/test");
 
 		return model;
 	}
