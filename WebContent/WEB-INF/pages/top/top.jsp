@@ -13,70 +13,56 @@
   <script src="<%=path %>/resources/js/jquery-1.12.4.js"></script>
   <script src="<%=path %>/resources/js/jquery-ui.js"></script>
   <style>
-  .ui-autocomplete-loading {
-    background: white url('images/ui-anim_basic_16x16.gif') right center no-repeat;
-  }
-  #keyWord { width: 25em; }
-
-  </style>
+	.search {
+		border: 1px solid #000;
+		height: 150px;
+		width: 100px;
+		float: left;
+		display: inline;
+		margin-left: 70px;
+		margin-top: 0px;
+		background-color: white;
+		position: absolute;
+	}
+	</style>
   <script>
-  $(function() {
-    function log( message ) {
-      $( "<div>" ).text( message ).prependTo( "#log" );
-      $( "#log" ).scrollTop( 0 );
-    }
- 
-    $( "#keyWord" ).autocomplete({
-      source: function( request, response ) {
-        $.ajax({
-          url: "<%=path%>/search",
-          dataType: "json",
-          data: {
-            keyword:$("#keyWord").val()
-          },
-          success: function( data ) {
-        	  alert(data);
-            response( $.map(data, function(item) {
-              return {
-                label: item.key,
-                value: item.value
-              }
-            }));
-          }
-        });
-      },
-      minLength: 2,
-      select: function( event, ui ) {
-        log( ui.item ?
-          "Selected: " + ui.item.label :
-          "Nothing selected, input was " + this.value);
-      },
-      open: function() {
-        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
-      },
-      close: function() {
-        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
-      }
-    });
-  });
+  	function keywordChanged(obj){
+  		if(obj.value.length==0){
+  			$("#list").hide();
+  			return;
+  		}
+  		$.ajax({
+            url: "<%=path%>/search",
+			dataType : "json",
+			data : {
+				keyword : $(obj).val()
+			},
+			success : function(data) {
+				var dataObj = eval("("+data+")");
+				$("#list").html("");
+				$.each(dataObj, function(index, item){
+					var preInnerHtml = $("#list").html();
+					$("#list").html(preInnerHtml + item + "<br/>");
+				})
+				
+				$("#list").show();
+			}
+  		})
+  	}
   </script>
 </head>
 <body>
 	<form id="form1" action="search" method="post">
 		<div>
-			<label>查询商品</label> <input type="text" id="keyWord" name="keyWord" style="width: 100px"/><input type="submit" value="检索"/>
+			<label>查询商品</label> <input type="text" id="keyWord" name="keyWord" style="width: 100px" oninput="keywordChanged(this);"/><input type="submit" value="检索"/>
 		</div>
 	</form>
-	<!-- <div class="search">hehe</div> -->
+	<div id="list" class="search" style="display:none">balal</div>
 	<c:forEach var="product" items="${topList}">
 		<div style="display: inline-block">
 			<img src="<%=path%>${product.picUrl}" /><br /> <label>商品名称:
 			</label>${product.name }<br /> <label>单价: </label>${product.price }
 		</div>
 	</c:forEach>
-</body>
-</html>
- 
- 
 </body>
 </html>

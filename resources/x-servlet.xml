@@ -6,7 +6,21 @@
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-	<mvc:annotation-driven />
+	<!-- <mvc:annotation-driven /> -->
+<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager" />   
+<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">   
+    <property name="favorPathExtension" value="false" />  
+    <property name="favorParameter" value="false" />   
+    <property name="ignoreAcceptHeader" value="false" />   
+    <property name="mediaTypes" >   
+        <value>  
+            atom=application/atom+xml  
+            html=text/html  
+            json=application/json  
+            *=*/*  
+        </value>   
+    </property>  
+</bean>  
 	<!-- 访问静态资源文件 -->
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<context:component-scan base-package="lorrywork.emall.controller" />
@@ -35,11 +49,38 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 		<property name="basePackage" value="lorrywork.emall.dao" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
+	<!-- 
 	<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">    
 	    <property name="supportedMediaTypes">    
 	        <list>    
-	            <value>application/json;charset=UTF-8</value>    
+	            <value>application/json;charset=UTF-8</value>
+	            <value>text/html;charset=UTF-8</value>
 	       </list>  
 	    </property>  
-	</bean>  
+	</bean>
+	 -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+					<property name="supportedMediaTypes">
+						<list>
+							<value>
+								text/html;charset=UTF-8
+							</value>
+						</list>
+					</property>
+				</bean>
+				<!-- 启动JSON格式的配置 -->
+				<bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+					<!-- 解决 HttpMediaTypeNotAcceptableException: Could not find acceptable representation -->
+					<property name="supportedMediaTypes">
+						<list>
+							<value>application/json;charset=UTF-8</value>
+						</list>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
 </beans> 

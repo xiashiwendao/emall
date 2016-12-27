@@ -22,9 +22,9 @@ public class TopController {
 	@RequestMapping(value = "/top")
 	public ModelAndView showTopPage(ModelAndView model) {
 		logger.debug("进入到首页面");
-		List<Product> lst = mapper.getTopList();
-		model.addObject("topList", lst);
-		model.setViewName("/test/test");
+		//List<Product> lst = mapper.getTopList();
+		//model.addObject("topList", lst);
+		model.setViewName("/top/top");
 
 		return model;
 	}

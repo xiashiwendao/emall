@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+
 import lorrywork.emall.base.Container;
 import lorrywork.emall.base.Jedisor;
 import lorrywork.emall.dao.ProductMapper;
@@ -44,11 +46,11 @@ public class ProductController extends BaseController {
 		logger.debug("/P/ keyword: {}", keyword);
 		//keyMgr.addKeyword(keyword);
 
-		Map<String, String> ret = new HashMap<String, String>();
-		ret.put("name", "About");
-		ret.put("name1", "Bep");
-		ret.put("name2", "City");
-
-		return "abc";
+		String[] lst = {"aa", "bb", "cc"};
+		Gson gson = new Gson();
+		String lsts = gson.toJson(lst);
+		
+		logger.debug("返回關鍵字列表：" + lsts);
+		return gson.toJson(lsts);
 	}
 }
