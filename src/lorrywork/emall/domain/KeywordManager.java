@@ -1,7 +1,12 @@
 package lorrywork.emall.domain;
 
+import java.util.Set;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import lorrywork.emall.base.ConfigProperties;
 import lorrywork.emall.base.Container;
 import lorrywork.emall.base.Jedisor;
 import redis.clients.jedis.Jedis;
@@ -9,6 +14,8 @@ import redis.clients.jedis.Pipeline;
 
 @Service
 public class KeywordManager {
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	public KeywordManager() {
 
 	}
@@ -32,9 +39,15 @@ public class KeywordManager {
 		return null;
 	}
 
-	public String getKeywords(String keyword) {
-		Jedis jedis = Container.getJedis();
-		jedis.hget("kw", keyword + "*");
-		return "";
+	public Object[] getKeywords(String keyword) {
+		logger.debug("关键字: {}", keyword);
+		// Jedis jedis = Container.getJedis();
+		String redisIp = ConfigProperties.getInstance().getPropValue("redis.ip");
+		int port = Integer.parseInt(ConfigProperties.getInstance().getPropValue("redis.port"));
+
+		Jedis jedis = new Jedis(redisIp, port);
+		Set<String> set = jedis.zrangeByLex("keywords", "[" + keyword, "+", 0, 30);
+		
+		return set.toArray();
 	}
 }

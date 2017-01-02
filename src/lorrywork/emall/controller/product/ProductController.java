@@ -1,5 +1,8 @@
 package lorrywork.emall.controller.product;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,16 +44,17 @@ public class ProductController extends BaseController {
 	private KeywordManager keyMgr;
 
 	@RequestMapping(value = "/search")
-	@ResponseBody
-	public String seachProduct(String keyword) {
+	@ResponseBody()
+	public String seachProduct(String keyword) throws Exception {
+		keyword = URLDecoder.decode(keyword, "UTF-8");
 		logger.debug("/P/ keyword: {}", keyword);
-		//keyMgr.addKeyword(keyword);
-
-		String[] lst = {"aa", "bb", "cc"};
+		Object[] lst = keyMgr.getKeywords(keyword);
 		Gson gson = new Gson();
 		String lsts = gson.toJson(lst);
+		String encodeLsts = URLEncoder.encode(lsts, "UTF-8");
+		String ret =  "\"" + encodeLsts.replace("%2C", ",") + "\"";
+		logger.debug("返回關鍵字列表：{}; 编码后: {}; 转JSON后: {}", lsts, encodeLsts, ret);
 		
-		logger.debug("返回關鍵字列表：" + lsts);
-		return gson.toJson(lsts);
+		return ret;
 	}
 }

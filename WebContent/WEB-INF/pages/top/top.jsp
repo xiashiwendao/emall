@@ -31,13 +31,18 @@
   			$("#list").hide();
   			return;
   		}
+  		// 空字符不处理
+  		if($(obj).val().replace(" ", "") == ""){
+  			return;
+  		}
   		$.ajax({
             url: "<%=path%>/search",
 			dataType : "json",
 			data : {
-				keyword : $(obj).val()
+				keyword : encodeURI($(obj).val())
 			},
 			success : function(data) {
+				data = decodeURI(data);
 				var dataObj = eval("("+data+")");
 				$("#list").html("");
 				$.each(dataObj, function(index, item){
@@ -54,7 +59,7 @@
 <body>
 	<form id="form1" action="search" method="post">
 		<div>
-			<label>查询商品</label> <input type="text" id="keyWord" name="keyWord" style="width: 100px" oninput="keywordChanged(this);"/><input type="submit" value="检索"/>
+			<label>查询商品</label> <input type="text" id="keyWord" name="keyWord" style="width: 100px" oninput="keywordChanged(this);" autocomplete="off"/><input type="submit" value="检索"/>
 		</div>
 	</form>
 	<div id="list" class="search" style="display:none">balal</div>

@@ -60,6 +60,9 @@ public class StartUp implements ServletContextListener {
 			}
 
 			jedis.close();
+			jedis.zadd("keywords", 3000, "我");
+			jedis.zadd("keywords", 3000, "我们");
+			jedis.zadd("keywords", 3000, "我们的");
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
