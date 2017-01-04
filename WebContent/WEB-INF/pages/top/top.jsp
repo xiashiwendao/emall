@@ -26,15 +26,53 @@
 	}
 	</style>
   <script>
+  	var lastKeyword="";
+  	function showText(text){
+  		$("#showText").html($("#showText").html() + "<br/>" + text);
+  	}
+  	
   	function keywordChanged(obj){
   		if(obj.value.length==0){
+  			showText("长度为0，不处理")
   			$("#list").hide();
   			return;
   		}
   		// 空字符不处理
   		if($(obj).val().replace(" ", "") == ""){
+  			showText("空字符串，不处理");
   			return;
   		}
+  		if(lastKeyword == $(obj).val()){
+  			showText("和上次关键字一样，忽略");
+  			$("#list").show();
+  			return;
+  		}
+  		lastKeyword = $(obj).val();
+  		showText("设置查询关键字: " + ($(obj).val()));
+  		var count = 0;
+  		showText("显示下拉菜单内容：")
+  		$("#list").children("label").each(function(){
+  			labelText = $(this).html();
+  			showText(labelText);
+  			keyword = $(obj).val();
+  			showText("keyword: " + keyword + "; item: " + labelText);
+  			if(labelText.indexOf(keyword) >= 0){
+  				showText("包含关键字");
+  				count++;
+  				//$(this).show();
+  				$(this).css("display", "block");
+  			}else{
+  				//$(this).hide();
+  				$(this).css("display", "none");
+  			}
+  		})
+  		
+  		if(count > 0){
+  			return;
+  		}
+  		
+  		lastKeyword=$(obj).val();
+  		$("#showText").html("重新查询:(");
   		$.ajax({
             url: "<%=path%>/search",
 			dataType : "json",
@@ -47,7 +85,7 @@
 				$("#list").html("");
 				$.each(dataObj, function(index, item){
 					var preInnerHtml = $("#list").html();
-					$("#list").html(preInnerHtml + item + "<br/>");
+					$("#list").html(preInnerHtml + "<label>" + item + "</label><br/>");
 				})
 				
 				$("#list").show();
@@ -59,9 +97,13 @@
 <body>
 	<form id="form1" action="search" method="post">
 		<div>
-			<label>查询商品</label> <input type="text" id="keyWord" name="keyWord" style="width: 100px" oninput="keywordChanged(this);" autocomplete="off"/><input type="submit" value="检索"/>
+			<label>查询商品</label>
+			<input type="text" id="keyWord" name="keyWord" style="width: 100px" onkeyup="keywordChanged(this);" autocomplete="off"/><input type="submit" value="检索"/>
 		</div>
 	</form>
+	<div>
+		显示内容：<label id="showText"></label>
+	</div>
 	<div id="list" class="search" style="display:none">balal</div>
 	<c:forEach var="product" items="${topList}">
 		<div style="display: inline-block">
