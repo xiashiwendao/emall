@@ -24,11 +24,15 @@
 		background-color: white;
 		position: absolute;
 	}
+	
+	#list label{
+		display: block
+	}
 	</style>
   <script>
   	var lastKeyword="";
   	function showText(text){
-  		$("#showText").html($("#showText").html() + "<br/>" + text);
+  		//$("#showText").html($("#showText").html() + "<br/>" + text);
   	}
   	
   	function keywordChanged(obj){
@@ -85,7 +89,7 @@
 				$("#list").html("");
 				$.each(dataObj, function(index, item){
 					var preInnerHtml = $("#list").html();
-					$("#list").html(preInnerHtml + "<label>" + item + "</label><br/>");
+					$("#list").html(preInnerHtml + "<label>" + item + "</label>");
 				})
 				
 				$("#list").show();
