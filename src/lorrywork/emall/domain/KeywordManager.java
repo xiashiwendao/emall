@@ -1,5 +1,7 @@
 package lorrywork.emall.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -41,13 +43,19 @@ public class KeywordManager {
 
 	public Object[] getKeywords(String keyword) {
 		logger.debug("关键字: {}", keyword);
-		// Jedis jedis = Container.getJedis();
 		String redisIp = ConfigProperties.getInstance().getPropValue("redis.ip");
 		int port = Integer.parseInt(ConfigProperties.getInstance().getPropValue("redis.port"));
 
 		Jedis jedis = new Jedis(redisIp, port);
-		Set<String> set = jedis.zrangeByLex("keywords", "[" + keyword, "+", 0, 30);
+		Set<String> set = jedis.zrangeByLex("keywords", "[" + keyword, "+", 0, 2);
+		jedis.close();
+		List<String> lst = new ArrayList<String>();
+		for(String item : set){
+			if(item.contains(keyword)){
+				lst.add(item);
+			}
+		}
 		
-		return set.toArray();
+		return lst.toArray();
 	}
 }

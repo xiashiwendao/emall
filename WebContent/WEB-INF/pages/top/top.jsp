@@ -63,10 +63,8 @@
   			if(labelText.indexOf(keyword) >= 0){
   				showText("包含关键字");
   				count++;
-  				//$(this).show();
   				$(this).css("display", "block");
   			}else{
-  				//$(this).hide();
   				$(this).css("display", "none");
   			}
   		})
